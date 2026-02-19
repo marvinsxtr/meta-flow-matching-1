@@ -51,8 +51,9 @@ class GlobalGNN(nn.Module):
                 input_size, self.D, self.num_hidden_decoder, self.num_layers_decoder
             )
 
-            self.temporal_freqs = (
-                torch.arange(1, self.num_temporal_freqs + 1, device="cuda") * torch.pi
+            self.register_buffer(
+                "temporal_freqs",
+                torch.arange(1, self.num_temporal_freqs + 1) * torch.pi,
             )
         else:
             input_size = (
